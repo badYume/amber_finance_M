@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { Text, View, SafeAreaView, TextInput, Button, Alert } from 'react-native';
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 export default function App() {
-    const [text, onChangeText] = React.useState(null);
-    const [number, onChangeNumber] = React.useState(null);
+  const [number, setNumber, onChangeNumber] = useState("");
+    const [text, setText, onChangeText] = useState("");
 
   return (
     <SafeAreaView className="mt-5">
@@ -24,6 +24,7 @@ export default function App() {
         <TextInput
         className="border border-black bg-gray-200 w-48 rounded-xl p-2  mx-20"
   onChangeText={onChangeNumber}
+  onChange={(e) => setNumber(e.target.value)}
   value={number}
   placeholder="Amount Here..."
   keyboardType="numeric"
@@ -32,14 +33,16 @@ export default function App() {
       <TextInput
       className="border border-black bg-gray-200 w-48 rounded-xl p-2  mx-20"
         onChangeText={onChangeText}
+        onChange={(e) => setText(e.target.value)}
         value={text}
         placeholder="Comment Here..."
       />
        <SafeAreaView className="mt-5 mx-32">
        <Button
-        title="Submit"
+        title="Add"
         color="limegreen"
         onPress={() => Alert.alert('Added Successfully...')}
+        disabled={[!number, !text]}
       />
               </SafeAreaView>
               </SafeAreaView>
